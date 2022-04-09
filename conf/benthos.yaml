@@ -1,0 +1,23 @@
+input:
+  label: ""
+  http_client:
+    url: http://localhost:4195/get
+    verb: GET
+    headers:
+      Content-Type: application/octet-stream
+    rate_limit: ""
+    timeout: 5s
+    payload: ""
+    stream:
+      enabled: false
+      reconnect: true
+      codec: lines
+
+output:
+  label: ""
+  amqp_1:
+    url: ""
+    target_address: ""
+    max_in_flight: 1
+    metadata:
+      exclude_prefixes: []

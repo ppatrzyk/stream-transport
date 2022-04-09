@@ -1,7 +1,9 @@
 version: "3.9"
 services:
-  web:
+  benthos:
     image: jeffail/benthos:4.0.0-rc3
+    volumes:
+      - ./conf/benthos.yaml:/benthos.yaml
     links:
       - rabbit
   rabbit:
