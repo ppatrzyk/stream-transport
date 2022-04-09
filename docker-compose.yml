@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3"
 services:
   benthos:
     image: jeffail/benthos:4.0.0-rc3
@@ -9,7 +9,7 @@ services:
   rabbit:
     image: rabbitmq:3.9.14
     volumes:
-      - ./conf/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
+      - ./conf/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
       - ./conf/definitions.json:/etc/rabbitmq/definitions.json
     ports:
       - 5672:5672  # TODO test only, uncomment this in the final version
