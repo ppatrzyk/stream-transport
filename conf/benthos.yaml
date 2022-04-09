@@ -24,7 +24,8 @@ input:
 output:
   label: ""
   amqp_0_9:
-    url: amqp://user_666:password_666@rabbit:5672
+    urls:
+      - amqp://user_666:password_666@rabbit:5672
     exchange: positions
     max_in_flight: 1
     metadata:
