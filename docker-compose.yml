@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  web:
+    image: jeffail/benthos:4.0.0-rc3
+    links:
+      - rabbit
+  rabbit:
+    image: rabbitmq:3.9.14
