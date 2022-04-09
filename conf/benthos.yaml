@@ -1,23 +1,31 @@
+
+rate_limit_resources:
+  - label: interval
+    local:
+      count: 1
+      interval: 5s
+
 input:
   label: ""
   http_client:
-    url: http://localhost:4195/get
-    verb: GET
+    url: https://mpk.wroc.pl/bus_position
+    verb: POST
     headers:
-      Content-Type: application/octet-stream
-    rate_limit: ""
-    timeout: 5s
-    payload: ""
+      Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+      User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:99.0) Gecko/20100101 Firefox/99.0
+      Host: mpk.wroc.pl
+      Origin: https://mpk.wroc.pl
+    rate_limit: interval
+    timeout: 4s
+    payload: "busList%5Bbus%5D%5B%5D=100&busList%5Bbus%5D%5B%5D=101&busList%5Bbus%5D%5B%5D=102&busList%5Bbus%5D%5B%5D=103&busList%5Bbus%5D%5B%5D=104&busList%5Bbus%5D%5B%5D=105&busList%5Bbus%5D%5B%5D=106&busList%5Bbus%5D%5B%5D=107&busList%5Bbus%5D%5B%5D=108&busList%5Bbus%5D%5B%5D=109&busList%5Bbus%5D%5B%5D=110&busList%5Bbus%5D%5B%5D=111&busList%5Bbus%5D%5B%5D=112&busList%5Bbus%5D%5B%5D=113&busList%5Bbus%5D%5B%5D=114&busList%5Bbus%5D%5B%5D=115&busList%5Bbus%5D%5B%5D=116&busList%5Bbus%5D%5B%5D=118&busList%5Bbus%5D%5B%5D=119&busList%5Bbus%5D%5B%5D=120&busList%5Bbus%5D%5B%5D=121&busList%5Bbus%5D%5B%5D=122&busList%5Bbus%5D%5B%5D=124&busList%5Bbus%5D%5B%5D=125&busList%5Bbus%5D%5B%5D=126&busList%5Bbus%5D%5B%5D=127&busList%5Bbus%5D%5B%5D=128&busList%5Bbus%5D%5B%5D=129&busList%5Bbus%5D%5B%5D=130&busList%5Bbus%5D%5B%5D=131&busList%5Bbus%5D%5B%5D=132&busList%5Bbus%5D%5B%5D=133&busList%5Bbus%5D%5B%5D=134&busList%5Bbus%5D%5B%5D=136&busList%5Bbus%5D%5B%5D=140&busList%5Bbus%5D%5B%5D=142&busList%5Bbus%5D%5B%5D=143&busList%5Bbus%5D%5B%5D=144&busList%5Bbus%5D%5B%5D=145&busList%5Bbus%5D%5B%5D=146&busList%5Bbus%5D%5B%5D=147&busList%5Bbus%5D%5B%5D=148&busList%5Bbus%5D%5B%5D=149&busList%5Bbus%5D%5B%5D=150&busList%5Bbus%5D%5B%5D=151&busList%5Bbus%5D%5B%5D=206&busList%5Bbus%5D%5B%5D=240&busList%5Bbus%5D%5B%5D=241&busList%5Bbus%5D%5B%5D=242&busList%5Bbus%5D%5B%5D=243&busList%5Bbus%5D%5B%5D=244&busList%5Bbus%5D%5B%5D=245&busList%5Bbus%5D%5B%5D=246&busList%5Bbus%5D%5B%5D=247&busList%5Bbus%5D%5B%5D=248&busList%5Bbus%5D%5B%5D=249&busList%5Bbus%5D%5B%5D=250&busList%5Bbus%5D%5B%5D=251&busList%5Bbus%5D%5B%5D=253&busList%5Bbus%5D%5B%5D=255&busList%5Bbus%5D%5B%5D=257&busList%5Bbus%5D%5B%5D=259&busList%5Bbus%5D%5B%5D=315&busList%5Bbus%5D%5B%5D=319&busList%5Bbus%5D%5B%5D=602&busList%5Bbus%5D%5B%5D=607&busList%5Bbus%5D%5B%5D=700&busList%5Bbus%5D%5B%5D=710&busList%5Bbus%5D%5B%5D=a&busList%5Bbus%5D%5B%5D=c&busList%5Bbus%5D%5B%5D=d&busList%5Bbus%5D%5B%5D=k&busList%5Bbus%5D%5B%5D=n&busList%5Btram%5D%5B%5D=1&busList%5Btram%5D%5B%5D=2&busList%5Btram%5D%5B%5D=3&busList%5Btram%5D%5B%5D=4&busList%5Btram%5D%5B%5D=5&busList%5Btram%5D%5B%5D=6&busList%5Btram%5D%5B%5D=7&busList%5Btram%5D%5B%5D=8&busList%5Btram%5D%5B%5D=9&busList%5Btram%5D%5B%5D=10&busList%5Btram%5D%5B%5D=11&busList%5Btram%5D%5B%5D=15&busList%5Btram%5D%5B%5D=16&busList%5Btram%5D%5B%5D=17&busList%5Btram%5D%5B%5D=20&busList%5Btram%5D%5B%5D=23&busList%5Btram%5D%5B%5D=31&busList%5Btram%5D%5B%5D=33&busList%5Btram%5D%5B%5D=70&busList%5Btram%5D%5B%5D=74"
     stream:
       enabled: false
-      reconnect: true
-      codec: lines
 
 output:
   label: ""
-  amqp_1:
-    url: ""
-    target_address: ""
+  amqp_0_9:
+    url: amqp://user_666:password_666@rabbit:5672
+    exchange: positions
     max_in_flight: 1
     metadata:
       exclude_prefixes: []
