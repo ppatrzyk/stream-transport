@@ -33,15 +33,15 @@ defmodule StreamTransport.Handler do
 
   def handle_batch(:sqlite, messages, _batch_info, _context) do
     Logger.info("batcher:")
-    messages |> inspect() |> Logger.info()
+    messages |> length |> inspect() |> Logger.info()
+    messages |> hd |> inspect() |> Logger.info()
   end
 
   defp process_data(data, headers) do
-    {_key, _type, timestamp} = headers |> Enum.filter(fn({key, _, _}) -> key == "timestamp" end) |> hd
-    data = data
+    {_key, _type, raw_time} = headers |> Enum.filter(fn({key, _, _}) -> key == "timestamp" end) |> hd
+    {:ok, timestamp, 0} = DateTime.from_iso8601(raw_time)
+    data
     |> Poison.decode!
     |> Enum.map(&Map.put(&1, "timestamp", timestamp))
-    data |> inspect() |> Logger.info()
-    data
   end
 end
