@@ -2,6 +2,7 @@ defmodule StreamTransport.Handler do
   use Broadway
   alias Broadway.Message
   alias StreamTransport.Position
+  alias StreamTransport.Repo
 
   require Logger
 
@@ -33,11 +34,13 @@ defmodule StreamTransport.Handler do
   end
 
   def handle_batch(:sqlite, messages, _batch_info, _context) do
-    # entry = %Position{}
-    # |> Position.changeset(msg |> Map.fetch!(:data))
-    Logger.info("batcher:")
-    messages |> length |> inspect() |> Logger.info()
-    messages |> hd |> inspect() |> Logger.info()
+    entries = messages
+    |> Enum.map(&Map.fetch!(&1, :data))
+    |> Enum.concat
+
+    entries |> hd |> inspect() |> Logger.info()
+
+    Repo.insert_all(Position, entries)
   end
 
   defp process_data(data, headers) do
@@ -46,5 +49,6 @@ defmodule StreamTransport.Handler do
     data
     |> Poison.decode!
     |> Enum.map(&Map.put(&1, "timestamp", timestamp))
+    |> Enum.map(&Map.new(&1, fn {k, v} -> {String.to_atom(k), v} end))
   end
 end
