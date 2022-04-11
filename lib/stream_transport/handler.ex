@@ -25,19 +25,23 @@ defmodule StreamTransport.Handler do
   end
 
   def handle_message(:positions, message, _context) do
-    message |> inspect |> Logger.info
-
+    %{metadata: %{headers: headers}} = message
     message
-    |> Message.update_data(&process_data/1)
+    |> Message.update_data(&process_data(&1, headers))
     |> Message.put_batcher(:sqlite)
   end
 
   def handle_batch(:sqlite, messages, _batch_info, _context) do
-    # TODO
+    Logger.info("batcher:")
+    messages |> inspect() |> Logger.info()
   end
 
-  defp process_data(data) do
-    # TODO
+  defp process_data(data, headers) do
+    {_key, _type, timestamp} = headers |> Enum.filter(fn({key, _, _}) -> key == "timestamp" end) |> hd
+    data = data
+    |> Poison.decode!
+    |> Enum.map(&Map.put(&1, "timestamp", timestamp))
+    data |> inspect() |> Logger.info()
     data
   end
 end

@@ -24,6 +24,7 @@ defmodule StreamTransport.MixProject do
       {:broadway_rabbitmq, "~> 0.7.0"},
       {:ecto, "~> 3.7.2"},
       {:ecto_sqlite3, "~> 0.7.4"},
+      {:poison, "~> 5.0.0"},
     ]
   end
 end
