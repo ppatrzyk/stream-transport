@@ -8,7 +8,7 @@ defmodule StreamTransport.Position do
     field :type, :string
     field :x, :float
     field :y, :float
-    field :timestamp, :utc_datetime
+    field :timestamp, :utc_datetime_usec
   end
 
   @doc false

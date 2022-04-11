@@ -38,8 +38,6 @@ defmodule StreamTransport.Handler do
     |> Enum.map(&Map.fetch!(&1, :data))
     |> Enum.concat
 
-    entries |> hd |> inspect() |> Logger.info()
-
     Repo.insert_all(Position, entries)
   end
 
