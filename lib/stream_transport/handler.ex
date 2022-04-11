@@ -1,19 +1,22 @@
-defmodule Handler do
+defmodule StreamTransport.Handler do
   use Broadway
-
   alias Broadway.Message
+
+  require Logger
 
   def start_link(_opts) do
     Broadway.start_link(__MODULE__,
       name: __MODULE__,
       producer: [
         module: {BroadwayRabbitMQ.Producer,
-          queue: "my_queue",
+          connection: "amqp://user_666:password_666@localhost:5672", # TODO change to rabbit once in docker
+          queue: "positions",
+          metadata: ["timestamp", ],
         },
         concurrency: 1
       ],
       processors: [
-        positions: [concurrency: 50]
+        positions: [concurrency: 10]
       ],
       batchers: [
         sqlite: [concurrency: 5, batch_size: 10, batch_timeout: 1000]
@@ -32,6 +35,6 @@ defmodule Handler do
   end
 
   defp process_data(data) do
-    # TODO
+    data |> inspect |> Logger.info
   end
 end

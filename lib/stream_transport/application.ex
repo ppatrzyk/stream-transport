@@ -8,7 +8,7 @@ defmodule StreamTransport.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      {Handler, []},
+      {StreamTransport.Handler, []},
     ]
 
     opts = [strategy: :one_for_one, name: StreamTransport.Supervisor]
