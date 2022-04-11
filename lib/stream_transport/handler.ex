@@ -37,8 +37,8 @@ defmodule StreamTransport.Handler do
     entries = messages
     |> Enum.map(&Map.fetch!(&1, :data))
     |> Enum.concat
-
     Repo.insert_all(Position, entries)
+    messages
   end
 
   defp process_data(data, headers) do
