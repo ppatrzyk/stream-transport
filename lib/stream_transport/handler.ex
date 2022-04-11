@@ -11,7 +11,7 @@ defmodule StreamTransport.Handler do
         module: {BroadwayRabbitMQ.Producer,
           connection: "amqp://user_666:password_666@localhost:5672", # TODO change to rabbit once in docker
           queue: "positions",
-          metadata: ["timestamp", ],
+          metadata: [:headers, ],
         },
         concurrency: 1
       ],
@@ -25,9 +25,11 @@ defmodule StreamTransport.Handler do
   end
 
   def handle_message(:positions, message, _context) do
+    message |> inspect |> Logger.info
+
     message
     |> Message.update_data(&process_data/1)
-    |> Message.put_batcher(:s3)
+    |> Message.put_batcher(:sqlite)
   end
 
   def handle_batch(:sqlite, messages, _batch_info, _context) do
@@ -35,6 +37,7 @@ defmodule StreamTransport.Handler do
   end
 
   defp process_data(data) do
-    data |> inspect |> Logger.info
+    # TODO
+    data
   end
 end
