@@ -26,3 +26,4 @@ stream_transport-*.tar
 /tmp/
 
 /.elixir_ls
+/positions.db
