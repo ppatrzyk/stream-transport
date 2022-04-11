@@ -8,12 +8,9 @@ defmodule StreamTransport.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: StreamTransport.Worker.start_link(arg)
-      # {StreamTransport.Worker, arg}
+      {Handler, []},
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: StreamTransport.Supervisor]
     Supervisor.start_link(children, opts)
   end
