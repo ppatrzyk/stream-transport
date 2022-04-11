@@ -1,6 +1,7 @@
 defmodule StreamTransport.Handler do
   use Broadway
   alias Broadway.Message
+  alias StreamTransport.Position
 
   require Logger
 
@@ -32,6 +33,8 @@ defmodule StreamTransport.Handler do
   end
 
   def handle_batch(:sqlite, messages, _batch_info, _context) do
+    # entry = %Position{}
+    # |> Position.changeset(msg |> Map.fetch!(:data))
     Logger.info("batcher:")
     messages |> length |> inspect() |> Logger.info()
     messages |> hd |> inspect() |> Logger.info()

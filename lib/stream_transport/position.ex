@@ -3,7 +3,7 @@ defmodule StreamTransport.Position do
   import Ecto.Changeset
 
   schema "positions" do
-    field :k, :string
+    field :k, :integer
     field :name, :string
     field :type, :string
     field :x, :float
@@ -12,7 +12,7 @@ defmodule StreamTransport.Position do
   end
 
   @doc false
-  def changeset(positions, attrs) do
-    positions |> cast(attrs, [:k, :name, :type, :x, :y, :timestamp])
+  def changeset(position, attrs) do
+    position |> cast(attrs, [:k, :name, :type, :x, :y, :timestamp])
   end
 end

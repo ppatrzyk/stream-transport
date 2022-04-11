@@ -3,7 +3,7 @@ defmodule StreamTransport.Repo.Migrations.CreatePositions do
 
   def change do
     create table(:positions) do
-      add :k, :string
+      add :k, :integer
       add :name, :string
       add :type, :string
       add :x, :float
