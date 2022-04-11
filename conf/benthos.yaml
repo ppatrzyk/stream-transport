@@ -21,6 +21,11 @@ input:
     stream:
       enabled: false
 
+pipeline:
+  processors:
+  - bloblang: |
+      meta timestamp = now()
+
 output:
   label: ""
   amqp_0_9:
