@@ -11,7 +11,7 @@ defmodule StreamTransport.Handler do
       name: __MODULE__,
       producer: [
         module: {BroadwayRabbitMQ.Producer,
-          connection: "amqp://user_666:password_666@localhost:5672", # TODO change to rabbit once in docker
+          connection: "amqp://user_666:password_666@rabbit:5672",
           queue: "positions",
           metadata: [:headers, ],
         },
