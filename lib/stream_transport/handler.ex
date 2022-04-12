@@ -11,7 +11,11 @@ defmodule StreamTransport.Handler do
       name: __MODULE__,
       producer: [
         module: {BroadwayRabbitMQ.Producer,
-          connection: "amqp://user_666:password_666@rabbit:5672",
+          connection: [
+            username: "user_666",
+            password: "password_666",
+            host: "rabbit",
+          ],
           queue: "positions",
           metadata: [:headers, ],
         },
