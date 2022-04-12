@@ -11,5 +11,9 @@ services:
     volumes:
       - ./conf/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
       - ./conf/definitions.json:/etc/rabbitmq/definitions.json
-    ports:
-      - 5672:5672  # TODO test only, uncomment this in the final version
+  stream:
+    image: stream_transport:latest
+    volumes:
+      - ./data:/data
+    links:
+      - rabbit
