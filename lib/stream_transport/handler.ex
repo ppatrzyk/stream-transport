@@ -41,6 +41,7 @@ defmodule StreamTransport.Handler do
     entries = messages
     |> Enum.map(&Map.fetch!(&1, :data))
     |> Enum.concat
+    Logger.info("Writing #{entries |> length()} entries to DB")
     Repo.insert_all(Position, entries)
     messages
   end

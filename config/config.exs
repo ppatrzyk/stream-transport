@@ -5,3 +5,8 @@ config :stream_transport,
 
 config :stream_transport, StreamTransport.Repo,
   database: "data/positions.db"
+
+config :logger, :console,
+  level: :info,
+  utc_log: true,
+  metadata: :all

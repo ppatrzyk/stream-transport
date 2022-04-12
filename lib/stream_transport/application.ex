@@ -4,6 +4,7 @@ defmodule StreamTransport.Application do
   @moduledoc false
 
   use Application
+  require Logger
 
   @impl true
   def start(_type, _args) do
@@ -13,6 +14,7 @@ defmodule StreamTransport.Application do
     ]
 
     opts = [strategy: :one_for_one, name: StreamTransport.Supervisor]
+    Logger.info("App starting...")
     Supervisor.start_link(children, opts)
   end
 end
