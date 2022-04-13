@@ -49,9 +49,15 @@ defmodule StreamTransport.Handler do
   defp process_data(data, headers) do
     {_key, _type, raw_time} = headers |> Enum.filter(fn({key, _, _}) -> key == "timestamp" end) |> hd
     {:ok, timestamp, 0} = DateTime.from_iso8601(raw_time)
+
     data
     |> Poison.decode!
-    |> Enum.map(&Map.put(&1, "timestamp", timestamp))
-    |> Enum.map(&Map.new(&1, fn {k, v} -> {String.to_atom(k), v} end))
+    |> Enum.map(
+      fn entry ->
+        %Position{}
+        |> Position.changeset(Map.put(entry, "timestamp", timestamp))
+        |> Map.fetch!(:changes)
+      end
+    )
   end
 end
