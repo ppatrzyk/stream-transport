@@ -1,6 +1,6 @@
 # Stream Transport
 
-![flow](flow.drawio.svg)
+![flow](flowchart/flow.drawio.svg)
 
 ```
 # Create DB
