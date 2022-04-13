@@ -1,5 +1,7 @@
 # Stream Transport
 
+![flow](flow.drawio.svg)
+
 ```
 # Create DB
 mix ecto.create
